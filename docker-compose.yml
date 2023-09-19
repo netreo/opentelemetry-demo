@@ -605,6 +605,20 @@ services:
   # ********************
   # Telemetry Components
   # ********************
+  # Retrace Otel Appliance
+  retrace-otel-appliance:
+    image: stackify/retrace-otel-agent:latest
+    container_name: retrace
+    ports:
+      - 5001:80
+      - 5068:5068 # otlp http
+    environment:
+      - RETRACE_HOSTTYPE=CONTAINER
+      - RETRACE_ACTIVATIONKEY=#########
+      - AGENT__LOCALAUTHENTICATION__MODE=PasswordOnly
+      - AGENT__LOCALAUTHENTICATION__PASSWORD=Password123!
+      - RECEIVERS__OTLPHTTP__ENABLED=true
+
   # Jaeger
   jaeger:
     image: jaegertracing/all-in-one:1.48.0

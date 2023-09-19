@@ -461,6 +461,20 @@ services:
   # ********************
   # Telemetry Components
   # ********************
+  # Retrace
+  retrace-otel-appliance:
+    image: {RETRACE_IMAGE_NAME}:{RETRACE_IMAGE_VERSION}
+    container_name: retrace
+    ports:
+      - {RETRACE_ADMIN_PORT}:80
+      - {RETRACE_OTLPHTTP_PORT}:5068 # otlp http
+    environment:
+      - RETRACE_HOSTTYPE: CONTAINER
+      - RETRACE_ACTIVATIONKEY: {RETRACE_ACTIVATIONKEY}
+      - AGENT__LOCALAUTHENTICATION__MODE: PasswordOnly
+      _ AGENT__LOCALAUTHENTICATION__PASSWORD: {RETRACE_LOCAL_PASSWORD}
+      - RECEIVERS__OTLPHTTP__ENABLED=true
+
   # Jaeger
   jaeger:
     image: jaegertracing/all-in-one:1.48.0
