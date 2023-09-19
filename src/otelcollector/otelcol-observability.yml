@@ -12,10 +12,15 @@ exporters:
     resource_to_telemetry_conversion:
       enabled: true
     enable_open_metrics: true
+  otlphttp/retrace:
+    endpoint: http://retrace:5068
+    tls:
+      insecure: true
+      insecure_skip_verify: true
 
 service:
   pipelines:
     traces:
-      exporters: [otlp, logging, spanmetrics]
+      exporters: [otlp, logging, spanmetrics, otlphttp/retrace]
     metrics:
       exporters: [prometheus, logging]
