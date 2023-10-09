@@ -610,8 +610,8 @@ services:
     image: stackify/retrace-otel-agent:latest
     container_name: retrace
     ports:
-      - 5001:80
-      - 5068:5068 # otlp http
+      - 5068:80
+      - 5001:443
     environment:
       - RETRACE_HOSTTYPE=CONTAINER
       - RETRACE_ACTIVATIONKEY=#########
