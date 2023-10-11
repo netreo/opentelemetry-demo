@@ -15,7 +15,7 @@ receivers:
 exporters:
   logging:
   otlphttp/retrace:
-    endpoint: http://retrace:5068
+    endpoint: http://host.docker.internal:5068
     tls:
       insecure: true
       insecure_skip_verify: true
@@ -49,4 +49,4 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging, otlphttp/retrace]
+      exporters: [logging, otlp, otlphttp/retrace]

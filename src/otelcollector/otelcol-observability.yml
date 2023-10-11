@@ -13,7 +13,7 @@ exporters:
       enabled: true
     enable_open_metrics: true
   otlphttp/retrace:
-    endpoint: http://retrace:5068
+    endpoint: http://host.docker.internal:5068
     tls:
       insecure: true
       insecure_skip_verify: true
@@ -24,3 +24,5 @@ service:
       exporters: [otlp, logging, spanmetrics, otlphttp/retrace]
     metrics:
       exporters: [prometheus, logging]
+    logs:
+      exporters: [logging, otlphttp/retrace]

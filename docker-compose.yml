@@ -606,7 +606,7 @@ services:
   # Telemetry Components
   # ********************
   # Retrace Otel Appliance
-  retrace-otel-appliance:
+  retrace:
     image: stackify/retrace-otel-agent:latest
     container_name: retrace
     ports:
@@ -617,7 +617,6 @@ services:
       - RETRACE_ACTIVATIONKEY=#########
       - AGENT__LOCALAUTHENTICATION__MODE=PasswordOnly
       - AGENT__LOCALAUTHENTICATION__PASSWORD=Password123!
-      - RECEIVERS__OTLPHTTP__ENABLED=true
 
   # Jaeger
   jaeger:
@@ -679,6 +678,7 @@ services:
       - "8888"          # metrics endpoint
     depends_on:
       - jaeger
+      - retrace
     logging: *logging
 
   # Prometheus
